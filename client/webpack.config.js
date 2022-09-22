@@ -17,6 +17,7 @@ module.exports = () => {
     // once webpack is finished bundling and building our code,
     // what should be the name of the file of our bundled code
     // and where should that file go once it's all finished bundling
+    // "dist" ===  distribution
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
@@ -31,8 +32,22 @@ module.exports = () => {
         swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
-
-      })
+        fingerprints: false,
+        inject: true,
+        name: 'text-editor',
+        short_name: 'JATE',
+        description: 'Just Another Text Editor!',
+        background_color: '#225ca3',
+        theme_color: '#225ca3',
+        start_url: '.',
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+        ],
+      }),     
     ],
 
     // TODO: Add CSS loaders and babel to webpack.
